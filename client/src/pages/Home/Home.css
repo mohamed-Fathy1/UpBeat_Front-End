@@ -1,0 +1,120 @@
+.navbar-container {
+    background-color: rgba(33, 51, 57, 0.5);
+    width: 200px;
+    height: 100vh;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.navbar {
+    padding: 20px 20px;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar h3 {
+    font-size: 1rem;
+}
+
+.navbar h2 {
+    margin-bottom: 50px;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.navbar-items li {
+    margin: 10px;
+}
+
+.item:hover {
+    color: #e879f9;
+}
+
+.navbar-login-section {
+    position: absolute;
+    bottom: 20px;
+}
+
+.homepage-container {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.homepage-content {
+    padding: 20px;
+    /* background-color: rgba(33, 51, 57, 0.4); */
+    width: 90%;
+    margin-left: 5px;
+    height: 100vh;
+    border-radius: 10px;
+    overflow: auto;
+}
+.new-released {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.new-relased-items ul,
+.Popular-artists-items ul,
+.Popular-tracks-items ul{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    gap: 50px;
+}
+
+.content-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(33, 51, 57, 0.8);
+    border-radius: 10px;
+    padding: 10px;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+.content-item:hover {
+    transform: scale(1.1);
+}
+.content-item img {
+    height: 100px;
+    width: 100px;
+}
+
+.new-released h2,
+.popular-artists h2,
+.popular-tracks h2 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.new-released h5,
+.popular-artists h5,
+.popular-tracks h5 {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.home-sections {
+    background-color: rgba(33, 51, 57, 0.5);
+    padding: 5px 15px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+.homepage-content h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
