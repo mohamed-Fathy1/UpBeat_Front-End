@@ -1,17 +1,11 @@
 import { Link } from "react-router-dom";
 import "./TrackCard.css";
+import { Song } from "../../global.d";
 
-interface TrackCardProps {
-    image: string;
-    artist: string;
-    title: string;
-    alt: string;
-}
-
-function TrackCard({image, artist, title, alt}: TrackCardProps) {
+function TrackCard({link, image, artist, title, alt}: Song) {
   return (
     <li>
-      <Link to="/" className="content-item">
+      <Link to={link} className="content-item">
         <img src={image} alt={alt} />
         <h3>{artist}</h3>
         <h5>{title}</h5>

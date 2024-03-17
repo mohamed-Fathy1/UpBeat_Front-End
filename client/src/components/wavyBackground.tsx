@@ -1,4 +1,4 @@
-import wavyBackground from "../assets/wavy-background.mp4";
+import wavyBackground from "../../public/assets/wavy-background.mp4";
 
 export const WavyBackground = () => {
   return (
