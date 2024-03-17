@@ -1,0 +1,16 @@
+.track-container h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.track-container h5 {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.home-sections {
+  background-color: rgba(33, 51, 57, 0.5);
+  padding: 5px 15px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}

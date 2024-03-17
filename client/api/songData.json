@@ -1,0 +1,48 @@
+{
+  "New Released": [
+    {
+      "link": "/",
+      "image": "songCover1",
+      "alt": "song1",
+      "artist": "The Weeknd",
+      "title": "Popular"
+    },
+    {
+      "link": "/",
+      "image": "songCover2",
+      "alt": "song2",
+      "artist": "Ariana Grande",
+      "title": "Yes, And?"
+    }
+  ],
+  "Popular Artists": [
+    {
+      "link": "/",
+      "image": "adele",
+      "alt": "song2",
+      "artist": "Adele"
+    },
+    {
+      "link": "/",
+      "image": "coldplay",
+      "alt": "song2",
+      "artist": "ColdPlay"
+    }
+  ],
+  "Popular Tracks": [
+    {
+      "link": "/",
+      "image": "blinding",
+      "alt": "song2",
+      "artist": "The Weeknd",
+      "title": "Blinding lights"
+    },
+    {
+      "link": "/",
+      "image": "water",
+      "alt": "song2",
+      "artist": "Tyla",
+      "title": "Water"
+    }
+  ]
+}
