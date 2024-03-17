@@ -1,0 +1,48 @@
+{
+  "New Released": [
+    {
+      "link": "/",
+      "image": "../../assets/The_Weeknd_-_Popular.png",
+      "alt": "song1",
+      "artist": "The Weeknd",
+      "title": "Popular"
+    },
+    {
+      "link": "/",
+      "image": "../../assets/264x264.jpg",
+      "alt": "song2",
+      "artist": "Ariana Grande",
+      "title": "Yes, And?"
+    }
+  ],
+  "Popular Artists": [
+    {
+      "link": "/",
+      "image": "../../assets/ajeup0ayctw4ztltklrnuvtm-y4xulezgneawbqw4cs_custom-7aa29347d5da230c6101168c71549a7399302d0c-s1100-c50.jpg",
+      "alt": "song2",
+      "artist": "Adele"
+    },
+    {
+      "link": "/",
+      "image": "../../assets/ab6761610000e5eb989ed05e1f0570cc4726c2d3.jpg",
+      "alt": "song2",
+      "artist": "ColdPlay"
+    }
+  ],
+  "Popular Tracks": [
+    {
+      "link": "/",
+      "image": "../../assets/The_Weeknd_-_Blinding_Lights.png",
+      "alt": "song2",
+      "artist": "The Weeknd",
+      "title": "Blinding lights"
+    },
+    {
+      "link": "/",
+      "image": "../../assets/1aa429772140dc310608e2268b8133a6b5-tyla-.rsquare.w330.webp",
+      "alt": "song2",
+      "artist": "Tyla",
+      "title": "Water"
+    }
+  ]
+}

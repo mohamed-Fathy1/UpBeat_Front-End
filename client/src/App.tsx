@@ -1,3 +1,4 @@
+import { WavyBackground } from "./components/wavyBackground";
 import Home from "./pages/Home/Home"
 import LandingPage from "./pages/LandingPage/LandingPage";
 import {
@@ -13,7 +14,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <Home />
+    element: <Home isLoggedIn={false} usename="Hajar" />
   }
 ]);
 
@@ -21,6 +22,7 @@ function App() {
 
   return (
     <>
+      <WavyBackground />
       <RouterProvider router={router} />
     </>
   )
