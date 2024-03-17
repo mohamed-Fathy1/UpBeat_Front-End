@@ -1,4 +1,3 @@
-import { WavyBackground } from "../../components/wavy-background";
 import "./Home.css";
 import { Link } from "react-router-dom";
 import { FaHome, FaHeart, FaSearch } from "react-icons/fa";
@@ -21,8 +20,7 @@ interface Props {
 
 function HomePage({ isLoggedIn, usename }: Props) {
   return (
-    <WavyBackground className="w-screen h-screen">
-      <div className="homepage-container">
+  <div className="homepage-container relative">
         <div className="navbar-container">
           <nav className="navbar">
             <h2>UpBeat</h2>
@@ -154,7 +152,6 @@ function HomePage({ isLoggedIn, usename }: Props) {
         </div>
 
       </div>
-    </WavyBackground>
   )
 }
 
