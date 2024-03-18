@@ -2,7 +2,7 @@ import { FaHome, FaHeart, FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { BiSolidPlaylist } from "react-icons/bi";
 import { IoMdLogIn, IoMdLogOut } from "react-icons/io";
-import { IoPerson } from "react-icons/io5";
+import { IoPerson, IoPersonAdd } from "react-icons/io5";
 import "./SideNavbar.css";
 
 interface SideNavbarProps {
@@ -59,9 +59,15 @@ function SideNavbar({ isLoggedIn }: SideNavbarProps) {
           ) : (
             <ul className="navbar-items">
               <li>
+                <Link to="/signup" className="item">
+                  <IoPersonAdd />
+                  <h3>Sign up</h3>
+                </Link>
+              </li>
+              <li>
                 <Link to="/login" className="item">
                   <IoMdLogIn />
-                  <h3>Login</h3>
+                  <h3>Log in</h3>
                 </Link>
               </li>
             </ul>
