@@ -1,17 +1,16 @@
 import SongInfo from "./SongInfo";
 import AudioControls from "./AudioControls";
+import VolumeControls from "./VolumeControls";
 
 interface AudioPlayerProps {}
 
 const AudioPlayer: React.FC<AudioPlayerProps> = ({}) => {
   return (
     <footer className="fixed bottom-0 w-full max-w-screen-2xl">
-      <div className=" bg-gray-800 mx-2 text-white p-2 rounded-t-lg flex">
+      <div className="relative bg-gray-800 mx-2 text-white pt-7 py-3 px-4 rounded-t-lg flex justify-between items-center">
         <SongInfo />
         <AudioControls />
-        {
-          // <VolumeControls />
-        }
+        <VolumeControls />
       </div>
     </footer>
   );

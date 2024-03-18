@@ -1,5 +1,6 @@
 import { FaVolumeUp } from "react-icons/fa";
 import { CiMaximize1 } from "react-icons/ci";
+import { SliderHover } from "../SliderHover";
 
 interface VolumeControlsProps {}
 

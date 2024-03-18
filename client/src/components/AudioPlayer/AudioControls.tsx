@@ -18,7 +18,7 @@ const AudioControls: React.FC<
 > = ({}: AudioControlsProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-3">
       <div className="flex items-center gap-5">
         <FaShuffle className="text-lg cursor-pointer" />
         <IoIosSkipBackward className="text-2xl cursor-pointer" />
