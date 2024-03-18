@@ -3,6 +3,7 @@ import SideNavbar from "../../components/SideNavbar/SideNavbar";
 import TrackContainer from "../../components/TrackContrainer/TrackContrainer";
 import { useState, useEffect } from "react";
 import { MusicData } from "../../global.d";
+import AudioPlayer from "../../components/AudioPlayer/AudioPlayer"
 
 
 interface HomePageProps {
@@ -11,7 +12,7 @@ interface HomePageProps {
 }
 
 function HomePage({ isLoggedIn, usename }: HomePageProps) {
-  
+
   const [songData , setSongData] = useState<MusicData>({
     "New Released": [],
     "Popular Artists": [],
@@ -26,7 +27,7 @@ function HomePage({ isLoggedIn, usename }: HomePageProps) {
 
       return response;
     };
-    
+
     fetchData()
     .then((data) => {
       setSongData(data);
@@ -42,6 +43,7 @@ function HomePage({ isLoggedIn, usename }: HomePageProps) {
         <TrackContainer title="Popular Artists" song={songData}/>
         <TrackContainer title="Popular Tracks" song={songData}/>
       </div>
+      <AudioPlayer />
     </div>
   );
 }
