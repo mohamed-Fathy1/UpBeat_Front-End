@@ -1,4 +1,5 @@
 interface Song {
+  id: number;
   link: string;
   image: string;
   alt: string;
