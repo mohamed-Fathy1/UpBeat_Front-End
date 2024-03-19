@@ -50,6 +50,16 @@ let playerReducer = (state: IState, action: IAction) => {
         ...state,
         shuffle: action.payload,
       };
+    case "Like":
+      return {
+        ...state,
+        playlist: state.playlist.map((song) => {
+          if (song.id === action.payload) {
+            return { ...song, isLiked: !song.isLiked };
+          }
+          return song;
+        }),
+      };
     default:
       return state;
   }

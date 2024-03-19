@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 import playerReducer from "./playerReducer";
 import playerContext from "./playerContext";
+import { Song } from "../global.d";
 
 interface PlayerStateProps {
   children: React.ReactNode;
@@ -22,8 +23,12 @@ const PlayerState = ({ children }: PlayerStateProps) => {
     dispatch({ type: "SET_Current_Song", payload: id });
   };
 
-  const setPlaylist = (playlist: any) => {
+  const setPlaylist = (playlist: [Song]) => {
     dispatch({ type: "SET_PLAYLIST", payload: playlist });
+  };
+
+  const likeSong = (id: number) => {
+    dispatch({ type: "Like", payload: id });
   };
 
   return (
@@ -37,6 +42,7 @@ const PlayerState = ({ children }: PlayerStateProps) => {
         shuffle: state.shuffle,
         setCurrentSong,
         setPlaylist,
+        likeSong,
       }}
     >
       {children}

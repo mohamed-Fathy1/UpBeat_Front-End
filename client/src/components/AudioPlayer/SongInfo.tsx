@@ -1,4 +1,5 @@
 import { CiHeart } from "react-icons/ci";
+import { FaHeart } from "react-icons/fa";
 import "./SongInfo.css";
 import playerContext from "../../context/playerContext";
 import { useContext } from "react";
@@ -7,7 +8,7 @@ import { Song } from "../../global.d";
 interface SongInfoProps {}
 
 const SongInfo: React.FC<SongInfoProps> = ({}) => {
-  const { currentSong, playlist } = useContext(playerContext);
+  const { currentSong, playlist, likeSong } = useContext(playerContext);
 
   const currentSongIndex = playlist.findIndex(
     (song: Song) => song.id === currentSong
@@ -19,7 +20,7 @@ const SongInfo: React.FC<SongInfoProps> = ({}) => {
         alt={playlist[currentSongIndex]?.alt}
         className="w-14 aspect-square rounded-sm"
       />
-      <div>
+      <div className="min-w-12">
         <div className="text-sm font-semibold">
           {playlist[currentSongIndex]?.title}
         </div>
@@ -27,8 +28,17 @@ const SongInfo: React.FC<SongInfoProps> = ({}) => {
           {playlist[currentSongIndex]?.artist}
         </div>
       </div>
-      <div className="text-lg cursor-pointer">
-        <CiHeart />
+      <div className="text-lg">
+        <div
+          className="text-2xl cursor-pointer mx-auto"
+          onClick={() => likeSong(playlist[currentSongIndex]?.id)}
+        >
+          {playlist[currentSongIndex]?.isLiked ? (
+            <FaHeart className="text-red-500" />
+          ) : (
+            <CiHeart />
+          )}
+        </div>
       </div>
     </div>
   );
