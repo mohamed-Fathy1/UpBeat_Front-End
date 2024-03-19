@@ -1,24 +1,27 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import './Signup.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import FormField from '../../components/FormField/FormField';
+import { signupFormData, signupSchema } from '../../global.d';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-
-type formFields = {
-    username: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-}
 
 function Signup() {
     const { register,
         handleSubmit,
-        formState: { errors },
-        getValues,
-    } = useForm<formFields>();
+        formState: { errors, isSubmitting },
+        reset,
+    } = useForm<signupFormData>({
+        resolver: zodResolver(signupSchema),
+        mode: "onBlur",
+    });
 
-    const onSubmit: SubmitHandler<formFields> = (data) => {
+    const navigate = useNavigate()
+    const onSubmit: SubmitHandler<signupFormData> = (data) => {
         console.log(data);
+        alert("Congratulations! Your account has been created successfully.");
+        reset();
+        navigate('/login');
     };
 
     return (
@@ -26,77 +29,43 @@ function Signup() {
             <div className="form-container">
                 <h1>Sign up</h1>
                 <form className='signup-form' onSubmit={handleSubmit(onSubmit)}>
-                    <label htmlFor="username">
-                        Username:
-                        <input className='form-input'
-                            {...register("username", {
-                                required: "Username is required",
-                                minLength: {
-                                    value: 3,
-                                    message: "Username must have at least 3 characters",
-                                },
-                            })}
-                            type="text"
-                            id='username'
-                            autoComplete='off'
-                            placeholder='Username' />
-                        {errors.username && <p className="error-message">{errors.username.message}</p>}
-                    </label>
-                    <label htmlFor="email">
-                        E-mail:
-                        <input className='form-input'
-                            {...register("email", {
-                                required: "Email is required",
-                                validate: (value) => {
-                                    const pattern = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/
-                                    if(!pattern.test(value)) {
-                                        return "Invalid Email format";
-                                    }
-                                    return true;
-                                },
-                            })}
-                            type="email"
-                            id='email'
-                            autoComplete='off'
-                            placeholder='example@domain.com' />
-                        {errors.email && <p className="error-message">{errors.email.message}</p>}
-                    </label>
-                    <label htmlFor="password">
-                        Password:
-                        <input className='form-input'
-                            {...register("password", {
-                                required: "Password is required",
-                                minLength: {
-                                    value: 8,
-                                    message: "Password must have at least 8 characters"
-                                },
-                            })}
-                            type="password"
-                            id='password' />
-                       {errors.password && <p className="error-message">{errors.password.message}</p>}
-                    </label>
-                    <label htmlFor="confirm">
-                        Confirm Password:
-                        <input className='form-input'
-                            {...register("confirmPassword", {
-                                required: "Confirm password is required",
-                               validate: {
-                                matchesPreviousPassword: (value) => {
-                                    const { password } = getValues();
-                                    return password === value || "Passwords should match!";
-                                  }
-                               }
-                            })}
-                            type="password"
-                            id='confirm' />
-                        {errors.confirmPassword && <p className="error-message">{errors.confirmPassword.message}</p>}
-                    </label>
-                    <button className='signup-button'>Sign up</button>
+                    <FormField
+                        type='text'
+                        label='Username'
+                        id='username'
+                        placeholder='Username'
+                        name='username'
+                        register={register}
+                        error={errors.username} />
+                    <FormField
+                        type='text'
+                        label='Email'
+                        id='email'
+                        placeholder='Email'
+                        name='email'
+                        register={register}
+                        error={errors.email} />
+                    <FormField
+                        type='password'
+                        label='Password'
+                        id='password'
+                        name='password'
+                        register={register}
+                        error={errors.password} />
+                    <FormField
+                        type='password'
+                        label='Confirm Password'
+                        id='confirmPassword'
+                        name='confirmPassword'
+                        register={register}
+                        error={errors.confirmPassword} />
+
+                    <button className='signup-button' disabled={isSubmitting}>Sign up</button>
                 </form>
                 <p>
                     Already have an account?
                     <span className='line'>
-                        <Link to="login">
+                        <Link to="/login">
                             Log in
                         </Link>
                     </span>
