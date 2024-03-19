@@ -14,7 +14,7 @@ const PlayerState = ({ children }: PlayerStateProps) => {
     isPlaying: false,
     song: null,
     repeat: false,
-    shuffle: false,
+    isShuffle: false,
   };
 
   const [state, dispatch] = useReducer(playerReducer, initialState);
@@ -31,6 +31,48 @@ const PlayerState = ({ children }: PlayerStateProps) => {
     dispatch({ type: "Like", payload: id });
   };
 
+  const setNextSong = () => {
+    let index = state.playlist.findIndex(
+      (song: Song) => song.id === state.currentSong
+    );
+    if (state.isShuffle) {
+      index = Math.floor(Math.random() * state.playlist.length);
+      while (
+        index ===
+        state.playlist.findIndex((song: Song) => song.id === state.currentSong)
+      ) {
+        index = Math.floor(Math.random() * state.playlist.length);
+      }
+    } else {
+      index = (index + 1) % state.playlist.length;
+    }
+    dispatch({ type: "SET_Current_Song", payload: state.playlist[index].id });
+  };
+
+  const setPrevSong = () => {
+    let index = state.playlist.findIndex(
+      (song: Song) => song.id === state.currentSong
+    );
+    if (state.isShuffle) {
+      index = Math.floor(Math.random() * state.playlist.length);
+    } else {
+      index = (index - 1 + state.playlist.length) % state.playlist.length;
+    }
+    dispatch({ type: "SET_Current_Song", payload: state.playlist[index].id });
+  };
+
+  const toggleShuffle = () => {
+    dispatch({ type: "SET_SHUFFLE", payload: !state.isShuffle });
+  };
+
+  const togglePlay = () => {
+    if (state.isPlaying) {
+      dispatch({ type: "PAUSE", payload: !state.isPlaying });
+    } else {
+      dispatch({ type: "PLAY", payload: !state.isPlaying });
+    }
+  };
+
   return (
     <playerContext.Provider
       value={{
@@ -39,10 +81,14 @@ const PlayerState = ({ children }: PlayerStateProps) => {
         isPlaying: state.isPlaying,
         song: state.song,
         repeat: state.repeat,
-        shuffle: state.shuffle,
+        isShuffle: state.isShuffle,
         setCurrentSong,
         setPlaylist,
         likeSong,
+        setNextSong,
+        setPrevSong,
+        toggleShuffle,
+        togglePlay,
       }}
     >
       {children}

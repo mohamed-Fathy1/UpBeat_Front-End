@@ -4,7 +4,7 @@ interface IState {
   isPlaying: boolean;
   song: any;
   repeat: boolean;
-  shuffle: boolean;
+  isShuffle: boolean;
 }
 
 interface IAction {
@@ -48,7 +48,7 @@ let playerReducer = (state: IState, action: IAction) => {
     case "SET_SHUFFLE":
       return {
         ...state,
-        shuffle: action.payload,
+        isShuffle: action.payload,
       };
     case "Like":
       return {
