@@ -4,6 +4,7 @@ import { IoIosSkipForward } from "react-icons/io";
 import { IoIosSkipBackward } from "react-icons/io";
 import { FaShuffle } from "react-icons/fa6";
 import { FiRepeat } from "react-icons/fi";
+import { LuRepeat1 } from "react-icons/lu";
 import { SliderHover } from "../SliderHover";
 import { useContext, useEffect, useState, useRef } from "react";
 import playerContext from "../../context/playerContext";
@@ -22,6 +23,10 @@ const AudioControls: React.FC<AudioControlsProps> = ({ audioRef }) => {
     setPrevSong,
     toggleShuffle,
     isShuffle,
+    isRepeat,
+    isRepeatOnce,
+    toggleRepeat,
+    toggleRepeatOnce,
   } = useContext(playerContext);
 
   const animationRef = useRef<any>();
@@ -49,6 +54,25 @@ const AudioControls: React.FC<AudioControlsProps> = ({ audioRef }) => {
       }
     };
   }, []);
+
+  useEffect(() => {
+    audioRef.current?.addEventListener("ended", hangleEnded);
+    return () => {
+      audioRef.current?.removeEventListener("ended", hangleEnded);
+    };
+  }, [isRepeatOnce, isRepeat]);
+
+  const hangleEnded = () => {
+    if (!isRepeatOnce && !isRepeat) {
+      setNextSong();
+    } else {
+      setCurrentTime(0);
+      audioRef.current?.play();
+      if (isRepeatOnce) {
+        toggleRepeatOnce();
+      }
+    }
+  };
 
   const togglePlayPause = () => {
     if (isPlaying) {
@@ -101,7 +125,15 @@ const AudioControls: React.FC<AudioControlsProps> = ({ audioRef }) => {
           className="text-2xl cursor-pointer"
           onClick={() => setNextSong()}
         />
-        <FiRepeat className="text-lg cursor-pointer" />
+        <div onClick={() => toggleRepeat()}>
+          {isRepeatOnce ? (
+            <LuRepeat1 className="text-lg cursor-pointer text-green-500" />
+          ) : isRepeat ? (
+            <FiRepeat className="text-lg cursor-pointer text-green-500" />
+          ) : (
+            <FiRepeat className="text-lg cursor-pointer text-gray-300" />
+          )}
+        </div>
       </div>
       <div className="flex items-center gap-2">
         <div className="text-xs select-none text-gray-300">

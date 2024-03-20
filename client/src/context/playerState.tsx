@@ -15,6 +15,8 @@ const PlayerState = ({ children }: PlayerStateProps) => {
     song: null,
     repeat: false,
     isShuffle: false,
+    isRepeat: false,
+    isRepeatOnce: false,
   };
 
   const [state, dispatch] = useReducer(playerReducer, initialState);
@@ -65,12 +67,27 @@ const PlayerState = ({ children }: PlayerStateProps) => {
     dispatch({ type: "SET_SHUFFLE", payload: !state.isShuffle });
   };
 
+  const toggleRepeat = () => {
+    if (state.isRepeatOnce) {
+      dispatch({ type: "SET_REPEAT", payload: !state.isRepeat });
+      dispatch({ type: "SET_REPEAT_ONCE", payload: !state.isRepeatOnce });
+    } else if (state.isRepeat) {
+      dispatch({ type: "SET_REPEAT", payload: !state.isRepeat });
+    } else {
+      dispatch({ type: "SET_REPEAT_ONCE", payload: !state.isRepeatOnce });
+    }
+  };
+
   const togglePlay = () => {
     if (state.isPlaying) {
       dispatch({ type: "PAUSE", payload: !state.isPlaying });
     } else {
       dispatch({ type: "PLAY", payload: !state.isPlaying });
     }
+  };
+
+  const toggleRepeatOnce = () => {
+    dispatch({ type: "SET_REPEAT_ONCE", payload: !state.isRepeatOnce });
   };
 
   return (
@@ -80,8 +97,9 @@ const PlayerState = ({ children }: PlayerStateProps) => {
         currentSong: state.currentSong,
         isPlaying: state.isPlaying,
         song: state.song,
-        repeat: state.repeat,
         isShuffle: state.isShuffle,
+        isRepeat: state.isRepeat,
+        isRepeatOnce: state.isRepeatOnce,
         setCurrentSong,
         setPlaylist,
         likeSong,
@@ -89,6 +107,8 @@ const PlayerState = ({ children }: PlayerStateProps) => {
         setPrevSong,
         toggleShuffle,
         togglePlay,
+        toggleRepeat,
+        toggleRepeatOnce,
       }}
     >
       {children}
