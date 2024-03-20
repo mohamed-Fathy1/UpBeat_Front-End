@@ -5,18 +5,25 @@ interface SliderHoverProps {
   barStyles?: React.CSSProperties;
   thumbStyles?: React.CSSProperties;
   trackStyles?: React.CSSProperties;
+  trackRef: React.RefObject<any>;
+  value: number;
+  setCurrentTime?: (time: number) => void;
+  size: number;
 }
 
 export function SliderHover({
   barStyles,
   thumbStyles,
   trackStyles,
+  trackRef,
+  value,
+  setCurrentTime,
+  size,
 }: SliderHoverProps) {
   const { hovered, ref } = useHover();
 
   return (
     <Slider
-      defaultValue={40}
       min={0}
       max={100}
       ref={ref}
@@ -29,6 +36,15 @@ export function SliderHover({
         },
         bar: barStyles,
         root: trackStyles,
+      }}
+      size={size}
+      value={value}
+      onChange={(value) => {
+        const time = (trackRef.current.duration / 100) * value;
+        if (trackRef.current) {
+          trackRef.current.currentTime = time;
+        }
+        setCurrentTime && setCurrentTime(time);
       }}
     />
   );

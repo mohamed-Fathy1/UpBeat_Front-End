@@ -9,7 +9,7 @@ function VolumeControls({}: VolumeControlsProps) {
     <div className="flex items-center gap-3">
       <FaVolumeUp className="text-lg cursor-pointer" />
       <div className="w-20">
-        <SliderHover barStyles={{ backgroundColor: "#228BE6" }} />
+        <SliderHover barStyles={{ backgroundColor: "#228BE6" }} size={4} />
       </div>
       <CiMaximize1 className="text-lg cursor-pointer" />
     </div>

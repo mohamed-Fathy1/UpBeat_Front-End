@@ -20,7 +20,7 @@ const SongInfo: React.FC<SongInfoProps> = ({}) => {
         alt={playlist[currentSongIndex]?.alt}
         className="w-14 aspect-square rounded-sm"
       />
-      <div className="min-w-12">
+      <div className="min-w-12 flex flex-col gap-1">
         <div className="text-sm font-semibold">
           {playlist[currentSongIndex]?.title}
         </div>
