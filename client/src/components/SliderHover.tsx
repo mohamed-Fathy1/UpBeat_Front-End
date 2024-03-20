@@ -6,9 +6,10 @@ interface SliderHoverProps {
   thumbStyles?: React.CSSProperties;
   trackStyles?: React.CSSProperties;
   trackRef: React.RefObject<any>;
-  value: number;
+  value?: any;
   setCurrentTime?: (time: number) => void;
   size: number;
+  onVolumeChange?: (value: number) => void;
 }
 
 export function SliderHover({
@@ -19,6 +20,7 @@ export function SliderHover({
   value,
   setCurrentTime,
   size,
+  onVolumeChange,
 }: SliderHoverProps) {
   const { hovered, ref } = useHover();
 
@@ -26,6 +28,7 @@ export function SliderHover({
     <Slider
       min={0}
       max={100}
+      defaultValue={50}
       ref={ref}
       label={null}
       styles={{
@@ -40,11 +43,15 @@ export function SliderHover({
       size={size}
       value={value}
       onChange={(value) => {
-        const time = (trackRef.current.duration / 100) * value;
-        if (trackRef.current) {
-          trackRef.current.currentTime = time;
+        if (onVolumeChange) {
+          onVolumeChange(value / 100);
+        } else if (setCurrentTime) {
+          if (trackRef.current) {
+            const time = (trackRef.current.duration / 100) * value;
+            trackRef.current.currentTime = time;
+            setCurrentTime(time);
+          }
         }
-        setCurrentTime && setCurrentTime(time);
       }}
     />
   );

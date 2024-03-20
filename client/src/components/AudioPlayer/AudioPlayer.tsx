@@ -6,26 +6,10 @@ import VolumeControls from "./VolumeControls";
 // import { useEffect, useRef } from "react";
 import playerContext from "../../context/playerContext";
 import { useContext, useRef } from "react";
-interface AudioPlayerProps {
-  // audioTrack: number;
-  // playlist: [Song];
-}
+
+interface AudioPlayerProps {}
 
 const AudioPlayer: React.FC<AudioPlayerProps> = ({}) => {
-  // const togglePlayPauseRef: any = useRef(
-  //   createAudioPlayer(playlist[audioTrack - 1])
-  // );
-
-  // useEffect(() => {
-  //   console.log(playlist[audioTrack - 1]);
-  //   togglePlayPauseRef.current = createAudioPlayer(playlist[audioTrack - 1]);
-  //   togglePlayPauseRef.current.play();
-
-  //   return () => {
-  //     togglePlayPauseRef.current.pause();
-  //   };
-  // }, [audioTrack, playlist]);
-  // console.log(togglePlayPauseRef.current);
   const { currentSong, playlist } = useContext(playerContext);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -40,7 +24,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({}) => {
         />
         <SongInfo />
         <AudioControls audioRef={audioRef} />
-        <VolumeControls />
+        <VolumeControls audioRef={audioRef} />
       </div>
     </footer>
   );
