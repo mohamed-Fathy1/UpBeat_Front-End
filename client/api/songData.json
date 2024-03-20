@@ -7,7 +7,8 @@
       "alt": "song1",
       "artist": "The Weeknd",
       "title": "Popular",
-      "isLiked": false
+      "isLiked": false,
+      "src": "../../assets/The_Weeknd_-_Popular.mp3"
     },
     {
       "id": 2,
@@ -16,7 +17,8 @@
       "alt": "song2",
       "artist": "Ariana Grande",
       "title": "Yes, And?",
-      "isLiked": false
+      "isLiked": false,
+      "src": "../../assets/Ariana_Grande_-_Yes_And.mp3"
     }
   ],
   "Popular Artists": [
@@ -27,7 +29,8 @@
       "alt": "song2",
       "artist": "Adele",
       "title": "When We Were Young",
-      "isLiked": false
+      "isLiked": false,
+      "src": "../../assets/Adele_-_When_We_Were_Young.mp3"
     },
     {
       "id": 4,
@@ -36,7 +39,8 @@
       "alt": "song2",
       "artist": "ColdPlay",
       "title": "Yellow",
-      "isLiked": false
+      "isLiked": false,
+      "src": "../../assets/Coldplay_-_Yellow.mp3"
     }
   ],
   "Popular Tracks": [
@@ -47,7 +51,8 @@
       "alt": "song2",
       "artist": "The Weeknd",
       "title": "Blinding lights",
-      "isLiked": false
+      "isLiked": false,
+      "src": "../../assets/The_Weeknd_-_Blinding_Lights.mp3"
     },
     {
       "id": 6,
@@ -56,7 +61,8 @@
       "alt": "song2",
       "artist": "Tyla",
       "title": "Water",
-      "isLiked": false
+      "isLiked": false,
+      "src": "../../assets/Tyla_-_Water.mp3"
     }
   ]
 }

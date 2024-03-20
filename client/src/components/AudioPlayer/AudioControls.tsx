@@ -5,18 +5,14 @@ import { IoIosSkipBackward } from "react-icons/io";
 import { FaShuffle } from "react-icons/fa6";
 import { FiRepeat } from "react-icons/fi";
 import { SliderHover } from "../SliderHover";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import playerContext from "../../context/playerContext";
 
 interface AudioControlsProps {
-  // isPlaying: boolean;
-  // setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
-  // skipTrack: (direction: string) => void;
+  audioRef: React.RefObject<HTMLAudioElement | null>;
 }
 
-const AudioControls: React.FC<
-  AudioControlsProps
-> = ({}: AudioControlsProps) => {
+const AudioControls: React.FC<AudioControlsProps> = ({ audioRef }) => {
   const {
     togglePlay,
     isPlaying,
@@ -48,10 +44,13 @@ const AudioControls: React.FC<
         />
         <div
           className="w-10 aspect-square text-gray-800 bg-white rounded-full flex items-center justify-center cursor-pointer"
-          onClick={() => togglePlay()}
+          onClick={() => {
+            togglePlay();
+            isPlaying ? audioRef.current?.pause() : audioRef.current?.play();
+          }}
         >
           {isPlaying ? (
-            <FaPause className="text-2xl cursor-pointer" />
+            <FaPause className="text-2xl" />
           ) : (
             <FaPlay className="text-xl" />
           )}
@@ -65,7 +64,7 @@ const AudioControls: React.FC<
       <div className="flex items-center gap-2">
         <div className="text-xs select-none text-gray-300">0:00</div>
         <div className="w-96">
-          <SliderHover barStyles={{ backgroundColor: "228BE6#" }} />
+          <SliderHover barStyles={{ backgroundColor: "#228BE6" }} />
         </div>
         <div className="text-xs select-none text-gray-300">3:00</div>
       </div>

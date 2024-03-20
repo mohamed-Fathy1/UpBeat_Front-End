@@ -5,6 +5,7 @@ interface Song {
   alt: string;
   artist: string;
   title: string;
+  src: string;
 }
 
 export interface MusicData {

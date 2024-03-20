@@ -24,6 +24,7 @@ function TrackContainer({ title, song }: TrackContainerProps) {
               artist={item.artist}
               title={item.title}
               alt={item.alt}
+              src={item.src}
             />
           ))}
         </ul>
