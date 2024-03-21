@@ -2,11 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-color: rgba(33, 51, 57, 0.8);
   border-radius: 10px;
   padding: 10px;
   gap: 5px;
   transition: all 0.3s ease;
+  width: max-content;
+  height: max-content;
 }
 
 .content-item:hover {
@@ -14,18 +17,18 @@
 }
 
 .content-item img {
+  margin-bottom: 8px;
   height: 100px;
-  width: 100px;
+  width: auto;
 }
-
+.content-item h3 {
+  text-align: center;
+  font-size: 1rem;
+}
 .track-container h5 {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.5);
+  text-align: center;
 }
 
-.new-relased-items ul {
-  display: flex;
-  flex-direction: row;
-  margin: 20px;
-  gap: 50px;
-}
+

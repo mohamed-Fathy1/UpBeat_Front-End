@@ -1,0 +1,7 @@
+.new-relased-items{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 20px 0px 20px 5px ;
+  }
