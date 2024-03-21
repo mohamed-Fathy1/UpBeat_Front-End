@@ -1,9 +1,10 @@
 import "./Home.css";
 import SideNavbar from "../../components/SideNavbar/SideNavbar";
 import TrackContainer from "../../components/TrackContrainer/TrackContrainer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { MusicData } from "../../global.d";
-
+import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
+import playerContext from "../../context/playerContext";
 
 interface HomePageProps {
   isLoggedIn: boolean;
@@ -11,26 +12,29 @@ interface HomePageProps {
 }
 
 function HomePage({ isLoggedIn, usename }: HomePageProps) {
-  
-  const [songData , setSongData] = useState<MusicData>({
+  const [songData, setSongData] = useState<MusicData>({
     "New Released": [],
     "Popular Artists": [],
     "Popular Tracks": [],
   });
 
+  const { setPlaylist, currentSong } = useContext(playerContext);
+
   useEffect(() => {
     const fetchData = async () => {
-      let response = await (
-        await fetch("../../api/songData.json")
-      ).json();
+      let response = await (await fetch("../../api/songData.json")).json();
 
+      const response1 = Object.keys(response)
+        .map((key) => response[key])
+        .flat();
+
+      setPlaylist(response1);
       return response;
     };
-    
-    fetchData()
-    .then((data) => {
+
+    fetchData().then((data) => {
       setSongData(data);
-    })
+    });
   }, []);
 
   return (
@@ -38,10 +42,11 @@ function HomePage({ isLoggedIn, usename }: HomePageProps) {
       <SideNavbar isLoggedIn={isLoggedIn} />
       <div className="homepage-content">
         {isLoggedIn && <h1>Welcome, {usename}</h1>}
-        <TrackContainer title="New Released" song={songData}/>
-        <TrackContainer title="Popular Artists" song={songData}/>
-        <TrackContainer title="Popular Tracks" song={songData}/>
+        <TrackContainer title="New Released" song={songData} />
+        <TrackContainer title="Popular Artists" song={songData} />
+        <TrackContainer title="Popular Tracks" song={songData} />
       </div>
+      {currentSong && <AudioPlayer />}
     </div>
   );
 }

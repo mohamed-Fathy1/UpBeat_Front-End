@@ -15,14 +15,16 @@ function TrackContainer({ title, song }: TrackContainerProps) {
       <h2>{title}</h2>
       <div className="new-relased-items">
         <ul>
-          {data?.map((item: Song, index: number) => (
+          {data?.map((item: Song) => (
             <TrackCard
-              key={index}
+              key={item.id}
+              id={item.id}
               link={item.link}
               image={item.image}
               artist={item.artist}
               title={item.title}
               alt={item.alt}
+              src={item.src}
             />
           ))}
         </ul>

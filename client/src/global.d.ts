@@ -2,11 +2,13 @@ import { FieldError, UseFormRegister } from "react-hook-form";
 import {ZodType, z} from 'zod';
 
 interface Song {
+  id: number;
   link: string;
   image: string;
   alt: string;
   artist: string;
   title: string;
+  src: string;
 }
 
 export interface MusicData {
