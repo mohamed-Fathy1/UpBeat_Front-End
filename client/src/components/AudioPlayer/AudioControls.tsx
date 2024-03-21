@@ -27,6 +27,7 @@ const AudioControls: React.FC<AudioControlsProps> = ({ audioRef }) => {
     isRepeatOnce,
     toggleRepeat,
     toggleRepeatOnce,
+    currentSong,
   } = useContext(playerContext);
 
   const animationRef = useRef<any>();
@@ -60,7 +61,7 @@ const AudioControls: React.FC<AudioControlsProps> = ({ audioRef }) => {
     return () => {
       audioRef.current?.removeEventListener("ended", hangleEnded);
     };
-  }, [isRepeatOnce, isRepeat]);
+  }, [isRepeatOnce, isRepeat, currentSong]);
 
   const hangleEnded = () => {
     if (!isRepeatOnce && !isRepeat) {
