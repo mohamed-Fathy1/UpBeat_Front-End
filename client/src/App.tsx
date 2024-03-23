@@ -1,13 +1,10 @@
 import { WavyBackground } from "./components/wavyBackground";
-import Home from "./pages/Home/Home"
+import Home from "./pages/Home/Home";
 import LandingPage from "./pages/LandingPage/LandingPage";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Signup from "./pages/Signup/Signup";
+import PlayerState from "./context/playerState";
 import Login from "./pages/Login/Login";
-
 
 const router = createBrowserRouter([
   {
@@ -16,11 +13,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <Home isLoggedIn={false} usename="Hajar" />
+    element: <Home isLoggedIn={false} usename="Hajar" />,
   },
   {
     path: "/signup",
-    element: <Signup />
+    element: <Signup />,
   },
   {
     path: "/login",
@@ -29,13 +26,14 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-
   return (
     <>
       <WavyBackground />
-      <RouterProvider router={router} />
+      <PlayerState>
+        <RouterProvider router={router} />
+      </PlayerState>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
