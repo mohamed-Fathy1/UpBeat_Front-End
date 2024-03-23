@@ -6,7 +6,7 @@ import playerContext from "../../context/playerContext";
 
 function TrackCard({ id, link, image, artist, title, alt }: Song) {
   const { setCurrentSong, currentSong } = useContext(playerContext);
-
+  
   return (
     <li
       onClick={() => setCurrentSong(id)}
@@ -19,7 +19,7 @@ function TrackCard({ id, link, image, artist, title, alt }: Song) {
         <h3>{artist}</h3>
         <h5>{title}</h5>
       </Link>
-    </li>
+    
   );
 }
 
