@@ -3,9 +3,11 @@ import "./NewReleasedItems.css";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { set } from "react-hook-form";
+import SkeletonCards from "../SkeletonCards/SkeletonCards";
 
 function NewReleasedItems({ clickedLeft, clickedRight }: any) {
   const [apiData, setApiData] = useState<any>();
+  const [isLoading, setIsLoading] = useState(true);
   const getapi = () => {
     axios
       .get("https://upbeat-server.onrender.com/api/v1/new_release/")
@@ -21,6 +23,7 @@ function NewReleasedItems({ clickedLeft, clickedRight }: any) {
             };
           })
         );
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -90,17 +93,21 @@ function NewReleasedItems({ clickedLeft, clickedRight }: any) {
 
   return (
     <div className="new-relased-items" ref={ref}>
-      {apiData?.map((item: any, index: number) => (
-        <TrackCard
-          key={index}
-          id={index}
-          link={item.link}
-          image={item.image}
-          artist={item.artist}
-          title={item.title}
-          alt={item.alt}
-        />
-      ))}
+      {isLoading ? (
+        <SkeletonCards count={8} />
+      ) : (
+        apiData?.map((item: any, index: number) => (
+          <TrackCard
+            key={index}
+            id={index}
+            link={item.link}
+            image={item.image}
+            artist={item.artist}
+            title={item.title}
+            alt={item.alt}
+          />
+        ))
+      )}
     </div>
   );
 }

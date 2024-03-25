@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import "./TrackCard.css";
-import { Song } from "../../global.d";
 import { useContext } from "react";
 import playerContext from "../../context/playerContext";
 
@@ -23,7 +22,7 @@ function TrackCard({ id, link, image, artist, title, alt }: TrackCardProps) {
         currentSong === id ? "border-green-500" : "border-transparent"
       }`}
     >
-      <Link to={""} className="">
+      <Link to={""}>
         <img src={image} alt={alt} className="rounded-sm" />
         <h3>{artist}</h3>
         <h5>{title}</h5>
