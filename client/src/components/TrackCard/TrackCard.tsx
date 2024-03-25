@@ -13,7 +13,7 @@ interface TrackCardProps {
   alt: string;
 }
 
-function TrackCard({ id, link, image, artist, title, alt }: Song) {
+function TrackCard({ id, link, image, artist, title, alt }: TrackCardProps) {
   const { setCurrentSong, currentSong } = useContext(playerContext);
 
   return (

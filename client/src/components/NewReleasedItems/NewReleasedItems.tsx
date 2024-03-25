@@ -93,6 +93,7 @@ function NewReleasedItems({ clickedLeft, clickedRight }: any) {
       {apiData?.map((item: any, index: number) => (
         <TrackCard
           key={index}
+          id={index}
           link={item.link}
           image={item.image}
           artist={item.artist}
