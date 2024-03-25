@@ -1,9 +1,6 @@
 import SongInfo from "./SongInfo";
 import AudioControls from "./AudioControls";
 import VolumeControls from "./VolumeControls";
-// import { createAudioPlayer } from "../../audioplayer/audioplayer";
-// import { Song } from "../../global";
-// import { useEffect, useRef } from "react";
 import playerContext from "../../context/playerContext";
 import { useContext, useRef } from "react";
 

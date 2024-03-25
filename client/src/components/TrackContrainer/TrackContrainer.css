@@ -9,7 +9,6 @@
   padding: 5px 15px;
   border-radius: 10px;
   margin-bottom: 10px;
-  height: max-content;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -17,17 +16,18 @@
 
 .navigate-container {
   margin-left: auto;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .navigate-button {
   background-color: hsl(292, 91%, 73%);
   border-radius: 50%;
   margin-right: 10px;
+  padding: 3px;
 }
 
 .navigate-button:hover {
-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .container-header {
