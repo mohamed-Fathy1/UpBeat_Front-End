@@ -1,21 +1,31 @@
 import { Link } from "react-router-dom";
 import FormField from "../../components/FormField/FormField";
 import './Login.css';
+import { useForm } from "react-hook-form";
+import axios from "axios";
+
 
 
 function Login() {
-   
+  const {handleSubmit} = useForm()
+
+  const onSubmit = () => {
+    axios.get("https://upbeat-server.onrender.com/api/v1/user/login")
+    .then(res => console.log(res))
+  }
+
     return (
         <div className="login-container relative">
             <div className="form-container">
                 <h1>Log in</h1>
-                <form className='login-form'>
+                <form className='login-form' onSubmit={handleSubmit(onSubmit)}>
                     <FormField
                         type='text'
                         label='Email'
                         id='email'
                         placeholder='Email'
-                        name="email" />
+                        name="email" 
+                        />
                     <FormField
                         type='password'
                         label='Password'
