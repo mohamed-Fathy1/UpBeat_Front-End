@@ -4,7 +4,7 @@ import { useContext } from "react";
 import playerContext from "../../context/playerContext";
 
 interface TrackCardProps {
-  id: string;
+  id: number;
   link: string;
   image: string;
   artist: string;
@@ -22,7 +22,7 @@ function TrackCard({ id, link, image, artist, title, alt }: TrackCardProps) {
         currentSong === id ? "border-green-500" : "border-transparent"
       }`}
     >
-      <Link to={""} className="content-item">
+      <Link to={""}>
         <img src={image} alt={alt} className="rounded-sm" />
         <h3>{artist}</h3>
         <h5>{title}</h5>

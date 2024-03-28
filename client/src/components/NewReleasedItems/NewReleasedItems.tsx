@@ -2,9 +2,12 @@ import TrackCard from "../TrackCard/TrackCard";
 import "./NewReleasedItems.css";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import { set } from "react-hook-form";
+import SkeletonCards from "../SkeletonCards/SkeletonCards";
 
 function NewReleasedItems({ clickedLeft, clickedRight }: any) {
   const [apiData, setApiData] = useState<any>();
+  const [isLoading, setIsLoading] = useState(true);
   const getapi = () => {
     axios
       .get("https://upbeat-server.onrender.com/api/v1/new_release/")
@@ -20,6 +23,7 @@ function NewReleasedItems({ clickedLeft, clickedRight }: any) {
             };
           })
         );
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -35,7 +39,10 @@ function NewReleasedItems({ clickedLeft, clickedRight }: any) {
   const scroll_right = () => {
     const amount = 200;
     const container = ref.current;
-    if (container) {
+    if (
+      container &&
+      container.scrollWidth - container.clientWidth > scrollPosition
+    ) {
       container.scrollBy({ top: 0, left: amount, behavior: "smooth" });
       setScrollPosition(scrollPosition + amount);
     }
@@ -43,7 +50,8 @@ function NewReleasedItems({ clickedLeft, clickedRight }: any) {
   const scroll_left = () => {
     const amount = 200;
     const container = ref.current;
-    if (container) {
+    console.log(container?.scrollHeight);
+    if (container && scrollPosition > 0) {
       container.scrollBy({ top: 0, left: amount, behavior: "smooth" });
       setScrollPosition(scrollPosition - amount);
     }
@@ -56,6 +64,26 @@ function NewReleasedItems({ clickedLeft, clickedRight }: any) {
   }, [scrollPosition]);
 
   useEffect(() => {
+    ref.current?.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      if (e.deltaY >= -15 && e.deltaY <= 15) {
+        ref.current?.scrollBy({
+          top: 0,
+          left: e.deltaY * 40,
+          behavior: "smooth",
+        });
+      } else {
+        ref.current?.scrollBy({
+          top: 0,
+          left: e.deltaY * 5,
+          behavior: "smooth",
+        });
+      }
+      setScrollPosition(ref.current?.scrollLeft || 0);
+    });
+  }, []);
+
+  useEffect(() => {
     scroll_left();
   }, [clickedLeft]);
 
@@ -65,17 +93,21 @@ function NewReleasedItems({ clickedLeft, clickedRight }: any) {
 
   return (
     <div className="new-relased-items" ref={ref}>
-      {apiData?.map((item: any, index: number) => (
-        <TrackCard
-          key={index}
-          id={index}
-          link={item.link}
-          image={item.image}
-          artist={item.artist}
-          title={item.title}
-          alt={item.alt}
-        />
-      ))}
+      {isLoading ? (
+        <SkeletonCards count={8} />
+      ) : (
+        apiData?.map((item: any, index: number) => (
+          <TrackCard
+            key={index}
+            id={index}
+            link={item.link}
+            image={item.image}
+            artist={item.artist}
+            title={item.title}
+            alt={item.alt}
+          />
+        ))
+      )}
     </div>
   );
 }
