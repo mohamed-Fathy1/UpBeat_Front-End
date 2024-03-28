@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Signup from "./pages/Signup/Signup";
 import PlayerState from "./context/playerState";
 import Login from "./pages/Login/Login";
+import Playlists from "./pages/Playlists/Playlists";
 
 const router = createBrowserRouter([
   {
@@ -21,8 +22,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />
-  }
+    element: <Login />,
+  },
+  {
+    path: "/playlist",
+    element: <Playlists isLoggedIn={false} usename="Hajar" />,
+  },
 ]);
 
 function App() {

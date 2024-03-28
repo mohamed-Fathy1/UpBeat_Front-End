@@ -1,12 +1,20 @@
 import { Link } from "react-router-dom";
 import "./TrackCard.css";
-import { Song } from "../../global.d";
 import { useContext } from "react";
 import playerContext from "../../context/playerContext";
 
-function TrackCard({ id, link, image, artist, title, alt }: Song) {
+interface TrackCardProps {
+  id: string;
+  link: string;
+  image: string;
+  artist: string;
+  title: string;
+  alt: string;
+}
+
+function TrackCard({ id, link, image, artist, title, alt }: TrackCardProps) {
   const { setCurrentSong, currentSong } = useContext(playerContext);
-  
+
   return (
     <li
       onClick={() => setCurrentSong(id)}
@@ -19,7 +27,7 @@ function TrackCard({ id, link, image, artist, title, alt }: Song) {
         <h3>{artist}</h3>
         <h5>{title}</h5>
       </Link>
-    
+    </li>
   );
 }
 
