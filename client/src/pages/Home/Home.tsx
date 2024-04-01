@@ -41,7 +41,7 @@ function HomePage() {
     <div className="homepage-container relative">
       <SideNavbar />
       <div className="homepage-content">
-        {sessionStorage.getItem('access_token') && <h1>Welcome</h1>}
+        {sessionStorage.getItem('access_token') && <h1>Welcome!</h1>}
         <TrackContainer />
       </div>
       {currentSong ? <AudioPlayer /> : null}
