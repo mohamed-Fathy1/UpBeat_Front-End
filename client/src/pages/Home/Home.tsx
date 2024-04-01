@@ -44,7 +44,7 @@ function HomePage({ isLoggedIn, usename }: HomePageProps) {
         {isLoggedIn && <h1>Welcome, {usename}</h1>}
         <TrackContainer />
       </div>
-      {currentSong ? <AudioPlayer /> : null}
+      {currentSong && <AudioPlayer />}
     </div>
   );
 }
