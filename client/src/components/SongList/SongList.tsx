@@ -7,7 +7,7 @@ import { Song } from "../../global";
 import { FaPlay } from "react-icons/fa";
 
 interface SongListProps {
-  songs: any[];
+  songs: any[] | [];
 }
 
 function formatDate(inputDate: string) {
@@ -25,14 +25,14 @@ function formatDate(inputDate: string) {
     "Nov",
     "Dec",
   ];
-  const [year, month, day] = inputDate.split("-");
+  const [year, month, day] = inputDate?.split("-");
   const formattedDate = `${parseInt(day, 10)} ${
     months[parseInt(month, 10) - 1]
   } ${year}`;
   return formattedDate;
 }
 
-function SongList({ songs }: SongListProps) {
+function SongList({ songs = [] }: SongListProps) {
   const { currentSong, playlist, likeSong } = useContext(playerContext);
 
   const currentSongIndex = playlist.findIndex(
@@ -75,7 +75,7 @@ function SongList({ songs }: SongListProps) {
               <div className="hidden @3xl:block">
                 {/* convert date to this format 27 Nov 2023 */}
                 <span className="text-gray-400">
-                  {formatDate(songs[i]?.release_date)}
+                  {songs[i]?.release_date && formatDate(songs[i]?.release_date)}
                 </span>
               </div>
               <div className="flex gap-4">

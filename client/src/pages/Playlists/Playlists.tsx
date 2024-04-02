@@ -3,6 +3,7 @@ import AlbumSlider from "../../components/AlbumSlider/AlbumSlider";
 import SideNavbar from "../../components/SideNavbar/SideNavbar";
 import axios from "axios";
 import SongList from "../../components/SongList/SongList";
+import AlbumGrid from "../../components/AlbumGrid/AlbumGrid";
 
 interface PlaylistsProps {
   isLoggedIn: boolean;
@@ -34,9 +35,9 @@ function Playlists({ isLoggedIn, usename }: PlaylistsProps) {
     axios
       .get("https://upbeat-server.onrender.com/api/v1/new_release/")
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         response.data.albums.items.map((item: any) => {
-          console.log(item);
+          // console.log(item);
           setMyPlaylists2((prev: any) => [...prev, item]);
         });
       })
@@ -51,7 +52,7 @@ function Playlists({ isLoggedIn, usename }: PlaylistsProps) {
       .then((response) => {
         // console.log(response.data.playlists.items);
         response.data.playlists.items.map((item: any) => {
-          // console.log(item);
+          console.log(item);
           setMyPlaylists3((prev: any) => [...prev, item]);
         });
       })
@@ -67,6 +68,7 @@ function Playlists({ isLoggedIn, usename }: PlaylistsProps) {
         <div className="bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30 border border-slate-700  bg-gray-800 mx-2 text-white py-4 pb-5 px-5 rounded-lg w-full min-h-[94vh] flex flex-col gap-10">
           <AlbumSlider tracks={myPlaylists} />
           <SongList songs={myPlaylists2} />
+          <AlbumGrid albums={myPlaylists3} />
         </div>
       </div>
     </div>
