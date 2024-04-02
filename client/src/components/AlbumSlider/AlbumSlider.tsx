@@ -1,4 +1,5 @@
 import "./AlbumSlider.css";
+import ListContainer from "../ListContainer/ListContainer";
 
 interface AlbumSliderProps {
   tracks: any[];
@@ -6,13 +7,7 @@ interface AlbumSliderProps {
 
 function AlbumSlider({ tracks }: AlbumSliderProps) {
   return (
-    <div>
-      <header className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">Playists for you </h2>
-        <span className="text-sm text-gray-400 cursor-pointer hover:text-white">
-          View All
-        </span>
-      </header>
+    <ListContainer title="PlayLists for you">
       <div className="flex gap-4 overflow-x-scroll mt-5 pb-4 album-slider">
         {[...Array(10)].map((_, i) => (
           <div
@@ -33,7 +28,7 @@ function AlbumSlider({ tracks }: AlbumSliderProps) {
           </div>
         ))}
       </div>
-    </div>
+    </ListContainer>
   );
 }
 
