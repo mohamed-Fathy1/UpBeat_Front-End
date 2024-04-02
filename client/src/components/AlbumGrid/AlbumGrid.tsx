@@ -8,7 +8,7 @@ interface AlbumGridProps {
 export default function AlbumGrid({ albums }: AlbumGridProps) {
   return (
     <ListContainer title="Today's Top Albums">
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-5 pb-4 place-items-center">
+      <div className="grid grid-cols-fluid gap-4 mt-5 pb-4 place-items-center md:max-h-[35rem] md:overflow-clip">
         {[...Array(10)].map((_, i) => (
           <div
             key={i}

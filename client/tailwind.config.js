@@ -10,7 +10,11 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        fluid: "repeat(auto-fit, minmax(max(11rem, 100%/6), 1fr))",
+      },
+    },
   },
   plugins: [require("@tailwindcss/container-queries")],
 };
