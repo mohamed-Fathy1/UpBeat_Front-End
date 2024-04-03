@@ -11,7 +11,7 @@ interface HomePageProps {
   usename: string;
 }
 
-function HomePage({ isLoggedIn, usename }: HomePageProps) {
+function HomePage() {
   const [songData, setSongData] = useState<MusicData>({
     "New Released": [],
     "Popular Artists": [],
@@ -39,9 +39,9 @@ function HomePage({ isLoggedIn, usename }: HomePageProps) {
 
   return (
     <div className="homepage-container relative">
-      <SideNavbar isLoggedIn={isLoggedIn} />
+      <SideNavbar />
       <div className="homepage-content">
-        {isLoggedIn && <h1>Welcome, {usename}</h1>}
+        {sessionStorage.getItem('access_token') && <h1>Welcome!</h1>}
         <TrackContainer />
       </div>
       {currentSong ? <AudioPlayer /> : null}
