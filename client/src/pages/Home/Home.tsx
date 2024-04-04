@@ -18,7 +18,7 @@ function HomePage({ isLoggedIn, usename }: HomePageProps) {
     "Popular Tracks": [],
   });
 
-  const { setPlaylist, currentSong } = useContext(playerContext);
+  const { setPlaylist } = useContext(playerContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +44,6 @@ function HomePage({ isLoggedIn, usename }: HomePageProps) {
         {isLoggedIn && <h1>Welcome, {usename}</h1>}
         <TrackContainer />
       </div>
-      {currentSong && <AudioPlayer />}
     </div>
   );
 }

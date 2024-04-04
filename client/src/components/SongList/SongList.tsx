@@ -39,7 +39,7 @@ function SongList({ songs = [] }: SongListProps) {
     (song: Song) => song.id === currentSong
   );
   return (
-    <ListContainer title="You may also like">
+    <ListContainer title="You may also like" id={songs[0]?.uri}>
       <div className="grid  lg:grid-cols-2 gap-y-2 gap-x-4 px-2 py-5">
         {[...Array(6)].map((_, i) => (
           <div key={i} className="@container">
@@ -54,7 +54,7 @@ function SongList({ songs = [] }: SongListProps) {
                   />
                   {/*  Add play icon over img on hover   */}
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-                    <FaPlay className="text-2xl text-white" />
+                    <FaPlay className="text-2xl text-fuchsia-400" />
                   </div>
                 </div>
                 <div>

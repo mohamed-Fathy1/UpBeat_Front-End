@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AlbumSlider from "../../components/AlbumSlider/AlbumSlider";
 import SideNavbar from "../../components/SideNavbar/SideNavbar";
 import axios from "axios";
 import SongList from "../../components/SongList/SongList";
 import AlbumGrid from "../../components/AlbumGrid/AlbumGrid";
+import ArtistsCard from "../../ArtistsCard/ArtistsCard";
+import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
+import playerContext from "../../context/playerContext";
 
 interface PlaylistsProps {
   isLoggedIn: boolean;
@@ -14,6 +17,7 @@ function Playlists({ isLoggedIn, usename }: PlaylistsProps) {
   const [myPlaylists, setMyPlaylists] = useState<any>([]);
   const [myPlaylists2, setMyPlaylists2] = useState<any>([]);
   const [myPlaylists3, setMyPlaylists3] = useState<any>([]);
+  const [artist, setArtist] = useState<any>([]);
 
   useEffect(() => {
     axios
@@ -52,8 +56,23 @@ function Playlists({ isLoggedIn, usename }: PlaylistsProps) {
       .then((response) => {
         // console.log(response.data.playlists.items);
         response.data.playlists.items.map((item: any) => {
-          console.log(item);
+          // console.log(item);
           setMyPlaylists3((prev: any) => [...prev, item]);
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("https://upbeat-server.onrender.com/api/v1/popular_artists")
+      .then((response) => {
+        // console.log(response.data);
+        response.data.artists.items.map((item: any) => {
+          // console.log(item);
+          setArtist((prev: any) => [...prev, item]);
         });
       })
       .catch((error) => {
@@ -69,6 +88,7 @@ function Playlists({ isLoggedIn, usename }: PlaylistsProps) {
           <AlbumSlider tracks={myPlaylists} />
           <SongList songs={myPlaylists2} />
           <AlbumGrid albums={myPlaylists3} />
+          <ArtistsCard artists={artist} />
         </div>
       </div>
     </div>

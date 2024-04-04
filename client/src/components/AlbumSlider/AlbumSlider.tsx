@@ -7,7 +7,7 @@ interface AlbumSliderProps {
 
 function AlbumSlider({ tracks }: AlbumSliderProps) {
   return (
-    <ListContainer title="PlayLists for you">
+    <ListContainer title="PlayLists for you" isScrollable>
       <div className="flex gap-4 overflow-x-scroll mt-5 pb-4 album-slider">
         {[...Array(10)].map((_, i) => (
           <div

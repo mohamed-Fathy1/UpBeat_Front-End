@@ -6,6 +6,10 @@ import Signup from "./pages/Signup/Signup";
 import PlayerState from "./context/playerState";
 import Login from "./pages/Login/Login";
 import Playlists from "./pages/Playlists/Playlists";
+import Playlist from "./pages/Playlist/Playlist";
+import AudioPlayer from "./components/AudioPlayer/AudioPlayer";
+import playerContext from "./context/playerContext";
+import { useContext } from "react";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +32,10 @@ const router = createBrowserRouter([
     path: "/playlist",
     element: <Playlists isLoggedIn={false} usename="Hajar" />,
   },
+  {
+    path: "/playlist/:id",
+    element: <Playlist isLoggedIn={false} usename="Hajar" />,
+  },
 ]);
 
 function App() {
@@ -36,6 +44,7 @@ function App() {
       <WavyBackground />
       <PlayerState>
         <RouterProvider router={router} />
+        <AudioPlayer />
       </PlayerState>
     </>
   );
