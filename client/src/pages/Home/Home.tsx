@@ -20,7 +20,7 @@ function HomePage() {
     "Popular Tracks": [],
   });
 
-  const { setPlaylist, currentSong } = useContext(playerContext);
+  const { setPlaylist } = useContext(playerContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,7 +55,6 @@ function HomePage() {
         {sessionStorage.getItem('access_token') && <h1>Welcome, {currentUser}</h1>}
         <TrackContainer />
       </div>
-      {currentSong ? <AudioPlayer /> : null}
     </div>
   );
 }
