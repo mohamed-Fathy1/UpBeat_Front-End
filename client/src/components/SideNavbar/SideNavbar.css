@@ -4,6 +4,7 @@
   height: 100vh;
   border-radius: 10px;
   overflow: hidden;
+  color: white;
 }
 
 .navbar {

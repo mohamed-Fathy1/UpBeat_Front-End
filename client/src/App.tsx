@@ -7,9 +7,8 @@ import PlayerState from "./context/playerState";
 import Login from "./pages/Login/Login";
 import Playlists from "./pages/Playlists/Playlists";
 import Playlist from "./pages/Playlist/Playlist";
-import AudioPlayer from "./components/AudioPlayer/AudioPlayer";
-import playerContext from "./context/playerContext";
-import { useContext } from "react";
+import AudioPlayer from "./components/AudioPlayer/AudioPlayer";;
+import Search from "./pages/Search/Search";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <Home isLoggedIn={false} usename="Hajar" />,
+    element: <Home />,
   },
   {
     path: "/signup",
@@ -36,6 +35,10 @@ const router = createBrowserRouter([
     path: "/playlist/:id",
     element: <Playlist isLoggedIn={false} usename="Hajar" />,
   },
+  {
+    path: "/search",
+    element: <Search />
+  }
 ]);
 
 function App() {

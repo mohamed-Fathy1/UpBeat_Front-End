@@ -9,7 +9,12 @@ interface SideNavbarProps {
   isLoggedIn: boolean;
 }
 
-function SideNavbar({ isLoggedIn }: SideNavbarProps) {
+function SideNavbar() {
+  const logOut = () => {
+    sessionStorage.removeItem("access_token")
+    sessionStorage.removeItem("refresh_token")
+  }
+
   return (
     <div className="navbar-container">
       <nav className="navbar">
@@ -41,7 +46,7 @@ function SideNavbar({ isLoggedIn }: SideNavbarProps) {
           </li>
         </ul>
         <div className="navbar-login-section navbar">
-          {isLoggedIn ? (
+          {sessionStorage.getItem('access_token')  ? (
             <ul className="navbar-items">
               <li>
                 <Link to="/account" className="item">
@@ -50,7 +55,7 @@ function SideNavbar({ isLoggedIn }: SideNavbarProps) {
                 </Link>
               </li>
               <li>
-                <Link to="/home" className="item">
+                <Link to="/login" className="item" onClick={logOut}>
                   <IoMdLogOut />
                   <h3>Logout</h3>
                 </Link>
