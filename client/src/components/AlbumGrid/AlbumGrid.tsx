@@ -11,11 +11,8 @@ export default function AlbumGrid({ albums }: AlbumGridProps) {
     <ListContainer title="Today's Top Albums">
       <div className="grid grid-cols-fluid gap-4 mt-5 pb-4 place-items-center md:max-h-[35rem] md:overflow-clip">
         {[...Array(10)].map((_, i) => (
-          <Link to={`/playlist/${albums[i]?.uri}`}>
-            <div
-              key={i}
-              className="rounded-md p-2 hover:bg-gray-700 hover:bg-opacity-40 transition-colors duration-300 ease-in-out cursor-pointer flex flex-col items-center gap-2 group"
-            >
+          <Link key={i} to={`/playlist/${albums[i]?.uri}`}>
+            <div className="rounded-md p-2 hover:bg-gray-700 hover:bg-opacity-40 transition-colors duration-300 ease-in-out cursor-pointer flex flex-col items-center gap-2 group">
               <div className="relative w-44 aspect-square rounded-lg overflow-hidden group cursor-pointer">
                 <img
                   src={albums[i]?.images[0].url}

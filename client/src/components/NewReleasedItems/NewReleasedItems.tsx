@@ -1,13 +1,15 @@
 import TrackCard from "../TrackCard/TrackCard";
 import "./NewReleasedItems.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import axios from "axios";
 import { set } from "react-hook-form";
 import SkeletonCards from "../SkeletonCards/SkeletonCards";
+import playerContext from "../../context/playerContext";
 
 function NewReleasedItems({ clickedLeft, clickedRight }: any) {
   const [apiData, setApiData] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
+  const { setPlaylist } = useContext(playerContext);
   const getapi = () => {
     axios
       .get("https://upbeat-server.onrender.com/api/v1/new_release/")
@@ -24,6 +26,8 @@ function NewReleasedItems({ clickedLeft, clickedRight }: any) {
           })
         );
         setIsLoading(false);
+        setPlaylist(res.data.albums.items);
+        console.log(res.data.albums.items);
       })
       .catch((err) => {
         console.log(err);
@@ -99,7 +103,7 @@ function NewReleasedItems({ clickedLeft, clickedRight }: any) {
         apiData?.map((item: any, index: number) => (
           <TrackCard
             key={index}
-            id={index}
+            id={item.uri}
             link={item.link}
             image={item.image}
             artist={item.artist}

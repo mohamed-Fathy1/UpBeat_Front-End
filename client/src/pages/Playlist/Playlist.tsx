@@ -21,7 +21,8 @@ function Playlist({ isLoggedIn, usename }: PlaylistsProps) {
   // const [playlist, setPlaylist] = useState<any>([]);
   const [songs, setSong] = useState<any>([]);
   let history = useNavigate();
-  const { setCurrentSong, setPlaylist } = useContext(playerContext);
+  const { setCurrentSong, currentSong, setPlaylist } =
+    useContext(playerContext);
 
   // const currentSongIndex = playlist.findIndex(
   //   (song: Song) => song.id === currentSong
@@ -51,9 +52,7 @@ function Playlist({ isLoggedIn, usename }: PlaylistsProps) {
 
   useEffect(() => {
     axios
-      .get(
-        `https://upbeat-server.onrender.com/api/v1/playlist/spotify:playlist:37i9dQZF1DWTl4y3vgJOXW/tracks`
-      )
+      .get(`https://upbeat-server.onrender.com/api/v1/playlist/${id}/tracks`)
       .then((response) => {
         console.log(response.data);
         response.data.map((item: any) => {
@@ -66,20 +65,6 @@ function Playlist({ isLoggedIn, usename }: PlaylistsProps) {
       });
   }, []);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`https://upbeat-server.onrender.com/api/v1/playlist/${id}/tracks`)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       response.data.map((item: any) => {
-  //         console.log(item.track);
-  //         setPlaylist((prev: any) => [...prev, item.track]);
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
   return (
     <div className="homepage-container relative">
       <SideNavbar isLoggedIn={isLoggedIn} />
@@ -180,6 +165,11 @@ function Playlist({ isLoggedIn, usename }: PlaylistsProps) {
                       {[...Array(20)].map((_, i) => (
                         <tr
                           key={i}
+                          style={
+                            currentSong === i
+                              ? { backgroundColor: "#374151" }
+                              : {}
+                          }
                           className="hover:bg-gray-700 cursor-pointer group"
                           onClick={() => {
                             setPlaylist(songs);
@@ -226,7 +216,7 @@ function Playlist({ isLoggedIn, usename }: PlaylistsProps) {
                               //   likeSong(playlist[currentSongIndex]?.id)
                               // }
                             >
-                              {true ? (
+                              {false ? (
                                 <FaHeart className="text-red-500" />
                               ) : (
                                 <CiHeart className="hover:text-red-500 transition-colors duration-200 ease-in-out" />

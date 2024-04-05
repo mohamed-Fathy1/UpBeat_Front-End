@@ -42,7 +42,6 @@ function Playlists({ isLoggedIn, usename }: PlaylistsProps) {
       .then((response) => {
         console.log(response.data);
         response.data.albums.items.map((item: any) => {
-          // console.log(item);
           setMyPlaylists2((prev: any) => [...prev, item]);
         });
       })

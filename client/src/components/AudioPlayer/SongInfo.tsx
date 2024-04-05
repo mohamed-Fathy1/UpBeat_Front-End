@@ -13,7 +13,7 @@ const SongInfo: React.FC<SongInfoProps> = ({}) => {
   return (
     <div className="flex items-center gap-3">
       <img
-        src={playlist[currentSong]?.album.images[2].url}
+        src={playlist[currentSong]?.album?.images[2]?.url}
         alt={playlist[currentSong]?.name}
         className="w-14 aspect-square rounded-sm"
       />
