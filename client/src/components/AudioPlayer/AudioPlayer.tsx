@@ -16,7 +16,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({}) => {
         <div className="relative bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30 border-x border-t border-slate-700  bg-gray-800 mx-2 text-white py-3 pb-4 px-4 rounded-t-lg flex justify-between items-center">
           <audio
             ref={audioRef}
-            src={playlist[currentSong - 1].src}
+            src={playlist[currentSong].preview_url}
             preload="metadata"
             autoPlay
           />

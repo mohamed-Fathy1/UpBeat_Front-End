@@ -39,8 +39,11 @@ function SongList({ songs = [] }: SongListProps) {
     (song: Song) => song.id === currentSong
   );
   return (
-    <ListContainer title="You may also like" id={songs[0]?.uri}>
-      <div className="grid  lg:grid-cols-2 gap-y-2 gap-x-4 px-2 py-5">
+    <ListContainer
+      title="You may also like"
+      id="spotify:playlist:37i9dQZF1DWZCOSaet9tpB"
+    >
+      <div className="grid lg:grid-cols-2 gap-y-2 gap-x-4 px-2 py-5">
         {[...Array(6)].map((_, i) => (
           <div key={i} className="@container">
             <div className="@container bg-gray-800 p-2 @xl:px-4 rounded-lg flex justify-between items-center group hover:bg-gray-700 transition-colors duration-300 ease-in-out cursor-pointer">

@@ -86,7 +86,7 @@ const AudioControls: React.FC<AudioControlsProps> = ({ audioRef }) => {
   };
 
   const whilePlaying = () => {
-    setCurrentTime(audioRef.current.currentTime);
+    setCurrentTime(audioRef?.current?.currentTime);
     animationRef.current = requestAnimationFrame(whilePlaying);
   };
   return (

@@ -17,9 +17,14 @@ const PlayerState = ({ children }: PlayerStateProps) => {
     isShuffle: false,
     isRepeat: false,
     isRepeatOnce: false,
+    isLoggedin: false,
   };
 
   const [state, dispatch] = useReducer(playerReducer, initialState);
+
+  const setIsLoggedin = (value: boolean) => {
+    dispatch({ type: "SET_IS_LOGGEDIN", payload: value });
+  };
 
   const setCurrentSong = (id: number) => {
     dispatch({ type: "SET_Current_Song", payload: id });
@@ -34,33 +39,26 @@ const PlayerState = ({ children }: PlayerStateProps) => {
   };
 
   const setNextSong = () => {
-    let index = state.playlist.findIndex(
-      (song: Song) => song.id === state.currentSong
-    );
+    let index = state.currentSong;
     if (state.isShuffle) {
-      index = Math.floor(Math.random() * state.playlist.length);
-      while (
-        index ===
-        state.playlist.findIndex((song: Song) => song.id === state.currentSong)
-      ) {
-        index = Math.floor(Math.random() * state.playlist.length);
+      index = Math.floor(Math.random() * state.playlist.length - 1);
+      while (state.currentSong === index) {
+        index = Math.floor(Math.random() * state.playlist.length - 1);
       }
     } else {
-      index = (index + 1) % state.playlist.length;
+      index = index + 1;
     }
-    dispatch({ type: "SET_Current_Song", payload: state.playlist[index].id });
+    dispatch({ type: "SET_Current_Song", payload: index });
   };
 
   const setPrevSong = () => {
-    let index = state.playlist.findIndex(
-      (song: Song) => song.id === state.currentSong
-    );
+    let index = state.currentSong;
     if (state.isShuffle) {
       index = Math.floor(Math.random() * state.playlist.length);
     } else {
       index = (index - 1 + state.playlist.length) % state.playlist.length;
     }
-    dispatch({ type: "SET_Current_Song", payload: state.playlist[index].id });
+    dispatch({ type: "SET_Current_Song", payload: index });
   };
 
   const toggleShuffle = () => {
@@ -109,6 +107,8 @@ const PlayerState = ({ children }: PlayerStateProps) => {
         togglePlay,
         toggleRepeat,
         toggleRepeatOnce,
+        isLoggedin: state.isLoggedin,
+        setIsLoggedin,
       }}
     >
       {children}

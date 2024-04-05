@@ -6,6 +6,7 @@ interface IState {
   isShuffle: boolean;
   isRepeat: boolean;
   isRepeatOnce: boolean;
+  isLoggedin: boolean;
 }
 
 interface IAction {
@@ -65,6 +66,11 @@ let playerReducer = (state: IState, action: IAction) => {
           }
           return song;
         }),
+      };
+    case "SET_IS_LOGGEDIN":
+      return {
+        ...state,
+        isLoggedin: action.payload,
       };
     default:
       return state;

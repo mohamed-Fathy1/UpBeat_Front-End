@@ -17,14 +17,16 @@ interface PlaylistsProps {
 function Playlist({ isLoggedIn, usename }: PlaylistsProps) {
   const { id } = useParams<{ id: string }>();
   console.log(id);
-  const [playlist, setPlaylist] = useState<any>([]);
+
+  // const [playlist, setPlaylist] = useState<any>([]);
   const [songs, setSong] = useState<any>([]);
   let history = useNavigate();
-  const { currentSong, playlist: any, likeSong } = useContext(playerContext);
+  const { setCurrentSong, currentSong, setPlaylist } =
+    useContext(playerContext);
 
-  const currentSongIndex = playlist.findIndex(
-    (song: Song) => song.id === currentSong
-  );
+  // const currentSongIndex = playlist.findIndex(
+  //   (song: Song) => song.id === currentSong
+  // );
 
   function formatDate(inputDate: string) {
     const months = [
@@ -50,9 +52,7 @@ function Playlist({ isLoggedIn, usename }: PlaylistsProps) {
 
   useEffect(() => {
     axios
-      .get(
-        `https://upbeat-server.onrender.com/api/v1/playlist/spotify:playlist:37i9dQZF1DWTl4y3vgJOXW/tracks`
-      )
+      .get(`https://upbeat-server.onrender.com/api/v1/playlist/${id}/tracks`)
       .then((response) => {
         console.log(response.data);
         response.data.map((item: any) => {
@@ -65,20 +65,6 @@ function Playlist({ isLoggedIn, usename }: PlaylistsProps) {
       });
   }, []);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`https://upbeat-server.onrender.com/api/v1/playlist/${id}/tracks`)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       response.data.map((item: any) => {
-  //         console.log(item.track);
-  //         setPlaylist((prev: any) => [...prev, item.track]);
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
   return (
     <div className="homepage-container relative">
       <SideNavbar isLoggedIn={isLoggedIn} />
@@ -179,7 +165,16 @@ function Playlist({ isLoggedIn, usename }: PlaylistsProps) {
                       {[...Array(20)].map((_, i) => (
                         <tr
                           key={i}
+                          style={
+                            currentSong === i
+                              ? { backgroundColor: "#374151" }
+                              : {}
+                          }
                           className="hover:bg-gray-700 cursor-pointer group"
+                          onClick={() => {
+                            setPlaylist(songs);
+                            setCurrentSong(i);
+                          }}
                         >
                           <td className="px-2 py-2 text-gray-400 hidden sm:table-cell">
                             {i + 1}
@@ -217,11 +212,11 @@ function Playlist({ isLoggedIn, usename }: PlaylistsProps) {
                           <td className="px-4 py-2 text-lg hidden lg:table-cell">
                             <div
                               className="text-2xl invisible group-hover:visible cursor-pointer mx-auto "
-                              onClick={() =>
-                                likeSong(playlist[currentSongIndex]?.id)
-                              }
+                              // onClick={() =>
+                              //   likeSong(playlist[currentSongIndex]?.id)
+                              // }
                             >
-                              {playlist[currentSongIndex]?.isLiked ? (
+                              {false ? (
                                 <FaHeart className="text-red-500" />
                               ) : (
                                 <CiHeart className="hover:text-red-500 transition-colors duration-200 ease-in-out" />

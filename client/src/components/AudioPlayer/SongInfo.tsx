@@ -10,30 +10,29 @@ interface SongInfoProps {}
 const SongInfo: React.FC<SongInfoProps> = ({}) => {
   const { currentSong, playlist, likeSong } = useContext(playerContext);
 
-  const currentSongIndex = playlist.findIndex(
-    (song: Song) => song.id === currentSong
-  );
   return (
     <div className="flex items-center gap-3">
       <img
-        src={playlist[currentSongIndex]?.image}
-        alt={playlist[currentSongIndex]?.alt}
+        src={playlist[currentSong]?.album?.images[2]?.url}
+        alt={playlist[currentSong]?.name}
         className="w-14 aspect-square rounded-sm"
       />
       <div className="min-w-12 flex flex-col gap-1">
         <div className="text-sm font-semibold">
-          {playlist[currentSongIndex]?.title}
+          {playlist[currentSong]?.name}
         </div>
         <div className="text-xs text-gray-300">
-          {playlist[currentSongIndex]?.artist}
+          {playlist[currentSong]?.artists
+            .map((artist: any) => artist.name)
+            .join(", ")}{" "}
         </div>
       </div>
       <div className="text-lg">
         <div
           className="text-2xl cursor-pointer mx-auto"
-          onClick={() => likeSong(playlist[currentSongIndex]?.id)}
+          onClick={() => likeSong(playlist[currentSong]?.id)}
         >
-          {playlist[currentSongIndex]?.isLiked ? (
+          {playlist[currentSong]?.isLiked ? (
             <FaHeart className="text-red-500" />
           ) : (
             <CiHeart />

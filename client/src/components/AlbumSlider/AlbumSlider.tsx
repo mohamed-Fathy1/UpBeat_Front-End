@@ -1,18 +1,31 @@
 import "./AlbumSlider.css";
 import ListContainer from "../ListContainer/ListContainer";
+import { Link } from "react-router-dom";
+import playerContext from "../../context/playerContext";
+import { useContext } from "react";
 
 interface AlbumSliderProps {
   tracks: any[];
 }
 
 function AlbumSlider({ tracks }: AlbumSliderProps) {
+  const { setCurrentSong, currentSong, setPlaylist } =
+    useContext(playerContext);
   return (
-    <ListContainer title="PlayLists for you" isScrollable>
+    <ListContainer
+      title="PlayLists for you"
+      isScrollable
+      id="spotify:playlist:37i9dQZF1DWZCOSaet9tpB"
+    >
       <div className="flex gap-4 overflow-x-scroll mt-5 pb-4 album-slider">
         {[...Array(10)].map((_, i) => (
           <div
             key={i}
             className="relative w-40 aspect-square rounded-lg overflow-hidden flex-shrink-0 group cursor-pointer"
+            onClick={() => {
+              setPlaylist(tracks);
+              setCurrentSong(i);
+            }}
           >
             <img
               src={tracks[i]?.album.images[0].url}
