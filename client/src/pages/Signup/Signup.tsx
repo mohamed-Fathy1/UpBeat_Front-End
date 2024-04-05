@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import FormField from '../../components/FormField/FormField';
 import { signupFormData, signupSchema } from '../../global.d';
 import { zodResolver } from '@hookform/resolvers/zod';
+import axios from "axios"
 
 
 function Signup() {
@@ -18,10 +19,22 @@ function Signup() {
 
     const navigate = useNavigate()
     const onSubmit: SubmitHandler<signupFormData> = (data) => {
-        console.log(data);
-        alert("Congratulations! Your account has been created successfully.");
-        reset();
-        navigate('/login');
+        const obj = {
+            firstname: data.username,
+            lastname:data.username,
+            username:data.username,
+            email:data.email,
+            password:data.password
+        }
+        axios.post("https://upbeat-server.onrender.com/api/v1/user/register", obj)
+            .then(res => {
+                console.log(res)
+                alert("Congratulations! Your account has been created successfully.");
+                reset();
+                navigate('/login');
+            })
+            .catch(err => console.log(err))
+
     };
 
     return (
