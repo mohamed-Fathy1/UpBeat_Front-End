@@ -5,20 +5,22 @@ import { useState, useEffect, useContext } from "react";
 import { MusicData } from "../../global.d";
 import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 import playerContext from "../../context/playerContext";
+import axios from "axios";
 
-interface HomePageProps {
-  isLoggedIn: boolean;
-  usename: string;
-}
+// interface HomePageProps {
+//   isLoggedIn: boolean;
+//   usename: string;
+// }
 
-function HomePage({ isLoggedIn, usename }: HomePageProps) {
+function HomePage() {
+  const [currentUser, setCurrentUser] = useState()
   const [songData, setSongData] = useState<MusicData>({
     "New Released": [],
     "Popular Artists": [],
     "Popular Tracks": [],
   });
 
-  const { setPlaylist, currentSong } = useContext(playerContext);
+  const { setPlaylist } = useContext(playerContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,18 +37,24 @@ function HomePage({ isLoggedIn, usename }: HomePageProps) {
     fetchData().then((data) => {
       setSongData(data);
     });
+    axios.get('https://upbeat-server.onrender.com/api/v1/user/current_user', {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
+      },
+    })
+      .then((res) => {
+        setCurrentUser(res?.data?.user?.firstname)
+      })
+      .catch((err) => console.log(err))
   }, []);
 
   return (
     <div className="homepage-container relative">
-      <SideNavbar isLoggedIn={isLoggedIn} />
+      <SideNavbar />
       <div className="homepage-content">
-        {isLoggedIn && <h1>Welcome, {usename}</h1>}
-        <TrackContainer title="New Released" song={songData} />
-        <TrackContainer title="Popular Artists" song={songData} />
-        <TrackContainer title="Popular Tracks" song={songData} />
+        {sessionStorage.getItem('access_token') && <h1>Welcome, {currentUser}</h1>}
+        <TrackContainer />
       </div>
-      {currentSong && <AudioPlayer />}
     </div>
   );
 }
