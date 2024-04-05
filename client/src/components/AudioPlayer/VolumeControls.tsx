@@ -12,7 +12,7 @@ function VolumeControls({ audioRef }: VolumeControlsProps) {
   const [mute, setMute] = useState(false);
   const handleVolumeChange = (value: number) => {
     audioRef.current.volume = value;
-    if (value > 0 && !mute) {
+    if (value > 0) {
       audioRef.current.muted = false;
       setMute(false);
     } else {
