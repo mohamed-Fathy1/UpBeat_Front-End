@@ -25,6 +25,7 @@ function Playlists({ isLoggedIn, usename }: PlaylistsProps) {
         "https://upbeat-server.onrender.com/api/v1/playlist/spotify:playlist:37i9dQZF1DWZCOSaet9tpB/tracks"
       )
       .then((response) => {
+        // console.log(response.data);
         response.data.map((item: any) => {
           // console.log(item.track);
           setMyPlaylists((prev: any) => [...prev, item.track]);
@@ -39,7 +40,7 @@ function Playlists({ isLoggedIn, usename }: PlaylistsProps) {
     axios
       .get("https://upbeat-server.onrender.com/api/v1/new_release/")
       .then((response) => {
-        // console.log(response.data);
+        console.log(response.data);
         response.data.albums.items.map((item: any) => {
           // console.log(item);
           setMyPlaylists2((prev: any) => [...prev, item]);
@@ -54,7 +55,7 @@ function Playlists({ isLoggedIn, usename }: PlaylistsProps) {
     axios
       .get("https://upbeat-server.onrender.com/api/v1/featured_playlist")
       .then((response) => {
-        // console.log(response.data.playlists.items);
+        // console.log(response.data);
         response.data.playlists.items.map((item: any) => {
           // console.log(item);
           setMyPlaylists3((prev: any) => [...prev, item]);

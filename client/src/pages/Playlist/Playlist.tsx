@@ -17,14 +17,15 @@ interface PlaylistsProps {
 function Playlist({ isLoggedIn, usename }: PlaylistsProps) {
   const { id } = useParams<{ id: string }>();
   console.log(id);
-  const [playlist, setPlaylist] = useState<any>([]);
+
+  // const [playlist, setPlaylist] = useState<any>([]);
   const [songs, setSong] = useState<any>([]);
   let history = useNavigate();
-  const { currentSong, playlist: any, likeSong } = useContext(playerContext);
+  const { setCurrentSong, setPlaylist } = useContext(playerContext);
 
-  const currentSongIndex = playlist.findIndex(
-    (song: Song) => song.id === currentSong
-  );
+  // const currentSongIndex = playlist.findIndex(
+  //   (song: Song) => song.id === currentSong
+  // );
 
   function formatDate(inputDate: string) {
     const months = [
@@ -180,6 +181,10 @@ function Playlist({ isLoggedIn, usename }: PlaylistsProps) {
                         <tr
                           key={i}
                           className="hover:bg-gray-700 cursor-pointer group"
+                          onClick={() => {
+                            setPlaylist(songs);
+                            setCurrentSong(i);
+                          }}
                         >
                           <td className="px-2 py-2 text-gray-400 hidden sm:table-cell">
                             {i + 1}
@@ -217,11 +222,11 @@ function Playlist({ isLoggedIn, usename }: PlaylistsProps) {
                           <td className="px-4 py-2 text-lg hidden lg:table-cell">
                             <div
                               className="text-2xl invisible group-hover:visible cursor-pointer mx-auto "
-                              onClick={() =>
-                                likeSong(playlist[currentSongIndex]?.id)
-                              }
+                              // onClick={() =>
+                              //   likeSong(playlist[currentSongIndex]?.id)
+                              // }
                             >
-                              {playlist[currentSongIndex]?.isLiked ? (
+                              {true ? (
                                 <FaHeart className="text-red-500" />
                               ) : (
                                 <CiHeart className="hover:text-red-500 transition-colors duration-200 ease-in-out" />

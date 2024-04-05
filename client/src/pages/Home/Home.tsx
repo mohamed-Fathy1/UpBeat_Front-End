@@ -3,7 +3,6 @@ import SideNavbar from "../../components/SideNavbar/SideNavbar";
 import TrackContainer from "../../components/TrackContrainer/TrackContrainer";
 import { useState, useEffect, useContext } from "react";
 import { MusicData } from "../../global.d";
-import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 import playerContext from "../../context/playerContext";
 
 interface HomePageProps {

@@ -34,21 +34,16 @@ const PlayerState = ({ children }: PlayerStateProps) => {
   };
 
   const setNextSong = () => {
-    let index = state.playlist.findIndex(
-      (song: Song) => song.id === state.currentSong
-    );
+    let index = state.currentSong;
     if (state.isShuffle) {
       index = Math.floor(Math.random() * state.playlist.length);
-      while (
-        index ===
-        state.playlist.findIndex((song: Song) => song.id === state.currentSong)
-      ) {
+      while (state.currentSong === index) {
         index = Math.floor(Math.random() * state.playlist.length);
       }
     } else {
       index = (index + 1) % state.playlist.length;
     }
-    dispatch({ type: "SET_Current_Song", payload: state.playlist[index].id });
+    dispatch({ type: "SET_Current_Song", payload: index });
   };
 
   const setPrevSong = () => {
